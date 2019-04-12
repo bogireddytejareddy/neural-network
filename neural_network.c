@@ -168,17 +168,14 @@ int main()
 		int i,j;
 		for(i=0;i<=12;i++)
 		{
-			//printf("%f \n",neuron_output[i]);
 			for(j=0;j<=12;j++)
 			{
 				neuron_output[i]=neuron_output[i]+(input[row][j]*weight[i][j]);
 			}
 			neuron_output[i]=neuron_output[i]+bais[i];
 			neuron_sigmoid[i]=sigmoid(neuron_output[i]);
-			//printf("%f ",neuron_sigmoid[i]);
 			neuron_output[i]=0;
 		}
-		//printf("\n");
 		int k,l;
 		for(k=0;k<=2;k++)
 		{
@@ -200,19 +197,15 @@ int main()
 		for(a=0;a<=2;a++)
 		{
 			delta_lastlayer[a]=lastlayer_sigmoid[a]*(1-lastlayer_sigmoid[a])*(target[a]-lastlayer_sigmoid[a]);
-			//printf("%f ",delta_lastlayer[a]);
 			error=error+pow(((target[a])-(lastlayer_sigmoid[a])),2);
 		}
-		//printf("\n");
 		int b,c;
 		for(b=0;b<=12;b++)
 		{
 			for(c=0;c<=2;c++)
 			{
-				//printf("%f ",delta_neuron[b]);
 				delta_neuron[b]=delta_neuron[b]+(neuron_sigmoid[b]*(1-neuron_sigmoid[b])*(delta_lastlayer[c]*sec_weight[c][b]));
 			}
-			//printf("\n");
 		}
 		int w1,w2;
 		for(w2=0;w2<=12;w2++)
@@ -220,11 +213,8 @@ int main()
 			for(w1=0;w1<=12;w1++)
 			{
 				weight[w1][w2]=(weight[w1][w2]*(1))+(0.1*delta_neuron[w1]*input[row][w2]);
-				//printf("%f ",weight[w1][w2]);
 			}
-			//printf("\n");
 		}
-		//printf("\n");
 		int sw1,sw2;
 		for(sw2=0;sw2<=12;sw2++)
 		{
@@ -233,9 +223,7 @@ int main()
 				sec_weight[sw1][sw2]=(sec_weight[sw1][sw2]*(1))+(0.1*delta_lastlayer[sw1]*neuron_sigmoid[sw2]);
 				//printf("%f ",sec_weight[sw1][sw2]);
 			}
-			//printf("\n");
 		}
-		//printf("\n");
 		int b1;
 		for(b1=0;b1<=12;b1++)
 		{
@@ -246,7 +234,6 @@ int main()
 		for(sb1=0;sb1<=2;sb1++)
 		{
 			sec_bais[sb1]=sec_bais[sb1]*(1)+(0.1*delta_lastlayer[sb1]);
-			//printf("%f ",sec_bais[sb1]);
 			delta_lastlayer[sb1]=0;
 		}
 		if(row==117)
@@ -313,7 +300,6 @@ int main()
 				lastlayer_output[p1]=lastlayer_output[p1]+(neuron_sigmoid[q1]*sec_weight[p1][q1]);
 			}
 			lastlayer_output[p1]=lastlayer_output[p1]+sec_bais[p1];
-			//printf("%f ",lastlayer_output[p1]);
 			lastlayer_sigmoid[p1]=sigmoid(lastlayer_output[p1]);
 			printf("%f:%f \n",test_target[p1],lastlayer_sigmoid[p1]);
 			lastlayer_output[p1]=0;
@@ -325,6 +311,5 @@ int main()
 		}
 		printf("\n");
 	}
-	//printf("%d\n",correctness);
 	printf("percent of correctly classified cases:%f\n",((float)correctness/60.00)*100);
 }
